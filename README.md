@@ -4,10 +4,10 @@
 Notes updated:
 8/18/2018
 
-Provider, currying and connect:
+-----------------Provider, currying and connect:--------------------------
 
 
-connect(mapStateToProps, mapDispatchToProps)(MyComponent)
+-------connect(mapStateToProps, mapDispatchToProps)(MyComponent)----------
 As a preview, MyComponent is the component you want to receive store state, dispatch, or both. mapStateToProps is a function that receives the current store, current props, and what it returns will be available to MyComponent is props. mapDispatchToProps allows you wrap action creators inside of dispatch. Let's take a closer look at each of them!
 
 In other words: the properties of the object returned from mapStateToProps() will be passed to the component as props! You can think of mapSateToProps() is just a function that lets connect() know how to map specific parts of the store’s state into usable props.
@@ -33,3 +33,45 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps)(MyPhotos);
+
+--------MapDispatchToProps------------------
+import React, { Component } from 'react';
+import {connect } from 'react-redux';
+import {updateName } from './actions';
+class User extends component {
+  state = { name: '' }
+  handleUpdateUser = () => {
+  this.props.dispatch(updateName(this.state.name))
+  }
+  render(){
+  //...
+  }
+  }
+  export default connect()(User);
+  
+  ---bind dispatch to your action creators before they ever reach your component-------------
+  import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateName } from './actions';
+
+class User extends Component {
+  state = { name: '' }
+  handleUpdateUser = () => {
+    this.props.boundUpdateName(this.state.name)
+  }
+  render () {
+    // ...
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  boundUpdateName: (name) => dispatch(updateName(name))
+});
+
+export default connect(null, mapDispatchToProps)(User);
+
+connect() connect store and component;
+
+
+How does MyComponent access state?
+A container component connects the store to MyComponent, giving MyComponent slices of state accessible via props.
