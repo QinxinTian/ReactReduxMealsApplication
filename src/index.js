@@ -5,6 +5,7 @@ import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 import { createStore } from 'redux'
 import reducer from './reducers'
+import { Provider } from 'react-redux'
 
 const store = createStore(
   reducer,
@@ -12,9 +13,9 @@ const store = createStore(
 )
 
 ReactDOM.render(
-  //1, pass store to the app component
-  //now app is going to receive store as the prop
-  <App store={store} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )
 registerServiceWorker()

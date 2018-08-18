@@ -1,57 +1,41 @@
 import React, { Component } from 'react'
-import { addRecipe } from '../actions'
+import { connect } from 'react-redux'
 
 class App extends Component {
-  state = {
-    calendar: null
-  }
-  componentDidMount () {
-    //3, grab the store from props
-    const { store } = this.props
-    store.subscribe(() => {
-      //4, subscribe to the changes
-      //get the state out of the store
-      //then put into the local component state;
-      //That will cause the re-render the Monday's breakfast;
-      this.setState(() => ({
-        calendar: store.getState()
-      }))
-    })
-  }
-  //5, create submit food method;
-  //invoke the addRecipe action creator;
-  //Remember to import it;
-  submitFood = () => {
-    //refer to the addRecipe;
-    //go to the reducer and update the store;
-    //It can also be replaced by using react-redux library;
-    this.props.store.dispatch(addRecipe({
-      day: 'monday',
-      meal: 'breakfast',
-      recipe: {
-        label: this.input.value
-      },
-    }))
-
-    this.input.value = ''
-  }
   render() {
+    //dispatch an action inside of the component;
+    //we can see the new format of our calendar;
+    console.log(this.props)
     return (
-      //2, input field;
       <div>
-        <input
-          type='text'
-          ref={(input) => this.input = input}
-          placeholder="Monday's Breakfast"
-        />
-        <button onClick={this.submitFood}>Submit</button>
-
-        <pre>
-          Monday's Breakfast: {this.state.calendar && this.state.calendar.monday.breakfast}
-        </pre>
+        Hello World
       </div>
     )
   }
 }
+//map redux state to the component props
+//This component is going to receive state or calendar
+//whatever returned from the state will be passed into
+//component as long as we pass the mapSteteToProps
+//as the first argument;
+function mapStateToProps (calendar) {
+  const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
-export default App
+  return {
+    calendar: dayOrder.map((day) => ({
+      day,
+      //return the keys of the object
+      meals: Object.keys(calendar[day]).reduce((meals, meal) => {
+        meals[meal] = calendar[day][meal]
+          ? calendar[day][meal]
+          : null
+
+        return meals
+      }, {})
+    })),
+  }
+}
+//pass component then you will be able to call dispatch;
+export default connect(
+  mapStateToProps,
+)(App)

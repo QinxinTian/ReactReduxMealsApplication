@@ -40,20 +40,16 @@ const initialCalendarState = {
     dinner: null,
   },
 }
-//if the state is undefined, we are going
-//to set as the initial state;
+
 function calendar (state = initialCalendarState, action) {
   const { day, recipe, meal } = action
 
   switch (action.type) {
     case ADD_RECIPE :
       return {
-        //same state we had before
         ...state,
         [day]: {
           ...state[day],
-          //whenever the action is dispatched,
-          //we change the meal;
           [meal]: recipe.label,
         }
       }
