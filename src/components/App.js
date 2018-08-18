@@ -6,20 +6,25 @@ class App extends Component {
     calendar: null
   }
   componentDidMount () {
-    //get the from props
+    //3, grab the store from props
     const { store } = this.props
-
     store.subscribe(() => {
-      //whenever anything changes, we call this.
-      //put it into the local re-render getState
-      //which will cause a re-rerender.
-      //returns the object;
+      //4, subscribe to the changes
+      //get the state out of the store
+      //then put into the local component state;
+      //That will cause the re-render the Monday's breakfast;
       this.setState(() => ({
         calendar: store.getState()
       }))
     })
   }
+  //5, create submit food method;
+  //invoke the addRecipe action creator;
+  //Remember to import it;
   submitFood = () => {
+    //refer to the addRecipe;
+    //go to the reducer and update the store;
+    //It can also be replaced by using react-redux library;
     this.props.store.dispatch(addRecipe({
       day: 'monday',
       meal: 'breakfast',
@@ -32,6 +37,7 @@ class App extends Component {
   }
   render() {
     return (
+      //2, input field;
       <div>
         <input
           type='text'
