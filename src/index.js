@@ -12,6 +12,8 @@ const store = createStore(
 )
 
 ReactDOM.render(
+  //1, pass store to the app component
+  //now app is going to receive store as the prop
   <App store={store} />,
   document.getElementById('root')
 )
