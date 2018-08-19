@@ -1,7 +1,69 @@
 # ReactReduxMealsApplication
 
-
 Notes updated:
+8/19/2018 5:18AM
+# middleware:
+thunk middleware can support asynchronous flow.
+asynchronous flow - interraction with the server.
+# reusability;
+# predictability;
+
+# thunk action creators - dispatch functions or promises.
+In order to change the store’s state, an action describing that change must be dispatched to the reducer. In turn, the reducer returns the new state.
+Middlware: An third party extension point between dispatching an action, and the moment it reaches the reducer.
+
+Once middleware receives the action, it can then carry out a number of operations, including:
+Producing a side effect
+Processing the action on its own (e.g., making an asynchronous HTTP request)
+Redirecting the action (e.g., to another piece of middleware)
+Running some code during the dispatch
+Dispatching supplementary actions.
+Redux is a “predictable state container” for web applications
+
+# The logger middleware: printing the store’s state before and after the reducer processes the action.
+
+# redux thunk
+We’re building a web app that stores a user’s to-do items. After the user logs in, the app needs to fetch all of the user’s to-dos from a database. Since Redux only supports the synchronous flow of data, we can use thunk middleware to asynchronously produce the HTTP request for this fetch action
+Make sure our store is ready to receive middleware:
+
+// store.js
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from '../reducers/root_reducer';
+
+const store = () => createStore(rootReducer, applyMiddleware(thunk));
+
+export default store;
+
+
+//http request, util/todos_api_util.js
+export const fetchTodos = () => fetch('/api/todos');
+
+Since thunk middleware allows us to write asynchronous action creators that return functions rather than objects, our new action creator can now look like:
+
+// actions/todo_actions.js
+
+import * as TodoAPIUtil from '../util/todo_api_util';
+
+export const RECEIVE_TODOS = "RECEIVE_TODOS";
+
+export const receiveTodos = todos => ({
+  type: RECEIVE_TODOS,
+  todos
+});
+
+export const fetchTodos = () => dispatch => (
+  TodoAPIUtil
+      .fetchTodos()
+      .then(todos => dispatch(receiveTodos(todos)))
+);
+
+receiveTodos() is an action creator that returns an object, with a type key of RECEIVE_TODOS along with the todos payload.
+fetchTodos() on the other hand, allows us to return a function. Here, we first make the HTTP request from TodoAPIUtil by setting up a Promise, the action to receive all to-do items is dispatched only when the original request is resolved.
+
+
+
+# Notes updated:
 8/18/2018
 
 -----------------Provider, currying and connect:--------------------------
