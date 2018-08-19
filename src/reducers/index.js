@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import {
-  //Normalization: Do not duplicate data;
-  //Keep your store as shallow as possible.
+  //Normalization: Do not duplicate data and Keep your store as shallow
+  //as possible;
+  //Edamam API Keys.
   ADD_RECIPE,
   REMOVE_FROM_CALENDAR,
   /*The problem is that Redux’s createStore() method
@@ -9,7 +10,7 @@ import {
   To combine all of your reducers into one, you
   can use Redux’s combineReducers() method.*/
 } from '../actions'
-////create the reducer for food, so whenever the ADD_RECIPE action
+//create the reducer for food, so whenever the ADD_RECIPE action
 //is dispatched, not only modify the calendar state
 //but also modify the food section of store
 function food (state = {}, action) {
