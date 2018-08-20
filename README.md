@@ -1,5 +1,21 @@
 # ReactReduxMealsApplication
 
+
+Notes updated:
+8/20/2018 00:43AM
+A user clicks the button in the component to render an index page, this component calls a thunk action creator that returns a function, the orders should be:
+API request occurs.
+API request is resolved.
+Thunk middleware invokes the function with dispatch();
+Action is dispatched.
+
+
+Organizing by types,
+and organizing by features.
+
+
+Applying middleware such as thunk helps solve the issue of asynchronous data flow. Thunk allows us to write action creators that return functions (rather than objects). The thunk can then be used to delay an action dispatch, or to dispatch only if a certain condition is met (e.g., a request is resolved).
+
 Notes updated:
 8/19/2018 5:18AM
 # middleware:
