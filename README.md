@@ -1,8 +1,6 @@
 # ReactReduxMealsApplication
 
 # Notes ordered by different day are listed below this commit section on this page.
-# Project description is on the bottom.
-
 # Commits:
 8/19
 - Edamam API and combine altogether.
