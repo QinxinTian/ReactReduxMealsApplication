@@ -1,5 +1,23 @@
 # ReactReduxMealsApplication
 
+# Notes ordered by different day are listed below this commit section on this page.
+# Project description is on the bottom.
+
+# Commits:
+8/19
+- Edamam API and combine altogether.
+- Calendar grid.
+- Combine Reducers.
+
+8/18
+- Map redux state to the component props, store subscribe.
+- Provider, currying and connect
+- Switch action type.
+- Utilizing the store, reducer, action altogether.
+
+8/16
+- Create actions, create reducers, create a redux store, with a lot of comments in details.
+
 
 Notes updated:
 8/20/2018 00:43AM
